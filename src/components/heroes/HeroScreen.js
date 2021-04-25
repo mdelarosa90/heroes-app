@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
 import {Redirect, useParams} from 'react-router-dom';
 import {getHeroById} from '../../selectors/getHeroById';
+import {heroImages} from '../../helpers/heroImages';
 export const HeroScreen = ({history}) => {
 
     const {heroeId}= useParams();
-    //const hero = getHeroById(heroeId);
     const hero = useMemo(() => getHeroById(heroeId), [heroeId]);
 
     if(!hero) {
@@ -24,7 +24,10 @@ export const HeroScreen = ({history}) => {
     return (
         <div className="row mt-5">
            <div className="col-4">
-                <img src={`../assets/heroes/${heroeId}.jpg`} className="img-thumbnail animate__animated animate__fadeInLeft" alt="Super hero" />
+                <img 
+                //src={`../../assets/heroes/${heroeId}.jpg`}
+                src={heroImages(`./${heroeId}.jpg`).default}
+                className="img-thumbnail animate__animated animate__fadeInLeft" alt="Super hero" />
            </div>
            <div className="col-8">
                 <h3>{superhero}</h3>
